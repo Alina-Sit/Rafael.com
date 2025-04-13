@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Аметистовый Сайт</title>
+  <link rel="icon" href="https://img.icons8.com/ios/50/ffffff/user.png" type="image/x-icon"> <!-- Фавикон -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      color: #fff;
+      background-image: url('https://images.unsplash.com/photo-1523580846011-d3a5bc25702b?auto=format&fit=crop&w=1470&q=80');
+      background-size: cover;
+      background-attachment: fixed;
+      background-position: center;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px; /* Уменьшено верхнее поле */
+      background-color: rgba(122, 78, 183, 0.8);
+    }
+
+    /* Эмблема сайта, которая теперь служит аватаркой */
+    .site-logo {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      cursor: pointer; /* Курсор при наведении */
+    }
+
+    .menu-icon {
+      width: 25px; /* Уменьшена иконка меню */
+      height: 20px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .menu-icon div {
+      height: 4px;
+      background-color: #fff;
+      border-radius: 2px;
+    }
+
+    .menu-links {
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: 70px;
+      right: 20px;
+    }
+
+    .menu-links a {
+      color: #fff;
+      text-decoration: none;
+      margin: 10px 0;
+      padding: 10px 15px;
+      border-radius: 8px;
+      transition: background-color 0.3s ease;
+      background-color: transparent; /* Убрали фон на ссылках */
+    }
+
+    .menu-links a:hover {
+      background-color: #b388eb;
+    }
+
+    .scroll-gallery {
+      display: flex;
+      overflow-x: auto;
+      padding: 20px;
+      gap: 15px;
+    }
+
+    .scroll-gallery img {
+      height: 200px;
+      border-radius: 10px;
+      flex-shrink: 0;
+    }
+
+    .info-section {
+      background-color: rgba(142, 102, 204, 0.85);
+      padding: 30px;
+      margin: 20px;
+      border-radius: 10px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .info-section h2 {
+      margin-top: 0;
+    }
+
+    /* Кнопка управления музыкой */
+    .music-control {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: rgba(122, 78, 183, 0.5); /* Сделали кнопку более прозрачной */
+      padding: 12px;
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+      z-index: 10;
+      transition: background-color 0.3s;
+    }
+
+    .music-control:hover {
+      background-color: rgba(122, 78, 183, 0.8); /* При наведении кнопка становится менее прозрачной */
+    }
+
+    .music-control img {
+      width: 30px;
+      height: 30px;
+    }
+
+    audio {
+      display: none;
+    }
+
+    /* Портфолио */
+    .portfolio {
+      display: none;
+      background-color: rgba(255, 255, 255, 0.9);
+      color: #333;
+      padding: 20px;
+      border-radius: 10px;
+      position: absolute;
+      top: 80px; /* Располагаем портфолио непосредственно под эмблемой */
+      left: 20px; /* Позиционируем в левом верхнем углу */
+      max-width: 300px;
+      text-align: center;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+      z-index: 20;
+    }
+
+    .portfolio img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      margin-bottom: 15px;
+    }
+
+    .portfolio button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #7a4eb7;
+      border: none;
+      border-radius: 5px;
+      color: #fff;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .portfolio button:hover {
+      background-color: #b388eb;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Фоновая музыка -->
+  <audio id="background-music" autoplay loop>
+    <source src="https://youtu.be/km-A0712YW0" type="audio/mpeg">
+    Твой браузер не поддерживает воспроизведение аудио.
+  </audio>
+
+  <!-- Заголовок и меню -->
+  <header>
+    <!-- Эмблема сайта, которая теперь служит аватаркой -->
+    <img class="site-logo" src="https://img.icons8.com/ios/50/ffffff/user.png" alt="Эмблема сайта" onclick="showPortfolio()">
+
+    <h1>Мой Аметистовый Сайт</h1>
+    <div class="menu-icon" onclick="toggleMenu()">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <div class="menu-links" id="menuLinks">
+      <a href="https://example.com">Ссылка 1</a>
+      <a href="https://example.com">Ссылка 2</a>
+      <a href="https://example.com">Ссылка 3</a>
+    </div>
+  </header>
+
+  <!-- Скролл галерея -->
+  <div class="scroll-gallery">
+    <img src="https://placekitten.com/300/200" alt="Фото 1" />
+    <img src="https://placekitten.com/301/200" alt="Фото 2" />
+    <img src="https://placekitten.com/302/200" alt="Фото 3" />
+    <img src="https://placekitten.com/303/200" alt="Фото 4" />
+    <img src="https://placekitten.com/304/200" alt="Фото 5" />
+  </div>
+
+  <!-- Блок с информацией -->
+  <div class="info-section">
+    <h2>Информация</h2>
+    <p>Этот сайт оформлен в аметистовом стиле с фоновым изображением, музыкой и удобным меню. У нас есть стильный скролл и плавные переходы.</p>
+  </div>
+
+  <!-- Портфолио -->
+  <div class="portfolio" id="portfolio">
+    <img src="https://placekitten.com/100/100" alt="Аватарка автора">
+    <h3>Имя: Иван Иванов</h3>
+    <p>Возраст: 25 лет</p>
+    <p>Дата рождения: 1 Января 1998</p>
+    <p>Рост: 180 см</p>
+    <p>Знак зодиака: Козерог</p>
+    <p>Работа: Веб-разработчик</p>
+    <button onclick="closePortfolio()">Закрыть</button>
+  </div>
+
+  <!-- Кнопка управления музыкой -->
+  <div class="music-control" onclick="toggleMusic()">
+    <img id="music-icon" src="https://img.icons8.com/ios/50/ffffff/play.png" alt="Play/Pause">
+  </div>
+
+  <!-- Скрипт для меню и музыки -->
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById('menuLinks');
+      menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
+    }
+
+    // Функция для управления музыкой
+    let isPlaying = true;
+    const audio = document.getElementById('background-music');
+    const musicIcon = document.getElementById('music-icon');
+
+    function toggleMusic() {
+      if (isPlaying) {
+        audio.pause();
+        musicIcon.src = 'https://img.icons8.com/ios/50/ffffff/pause.png'; // Меняем иконку на "пауза"
+      } else {
+        audio.play();
+        musicIcon.src = 'https://img.icons8.com/ios/50/ffffff/play.png'; // Меняем иконку на "воспроизведение"
+      }
+      isPlaying = !isPlaying;
+    }
+
+    // Функция для показа портфолио
+    function showPortfolio() {
+      document.getElementById('portfolio').style.display = 'block';
+    }
+
+    // Функция для закрытия портфолио
+    function closePortfolio() {
+      document.getElementById('portfolio').style.display = 'none';
+    }
+  </script>
+
+</body>
+</html>
